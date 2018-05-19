@@ -81,6 +81,12 @@ class PlaylistsController extends Controller
     public function edit($id)
     {
         $playlist = Playlist::find($id);
+
+        // Authorize
+        if(auth()->user()->id !== $playlist->user_id){
+            return redirect('/playlists/'.$id)->with('alert', 'You cannot edit someone elses playlist');
+        }
+
         return view('playlists.edit', ['playlist' => $playlist]);
     }
 
@@ -99,8 +105,14 @@ class PlaylistsController extends Controller
                 'description' => 'required'
             ]);
 
-        // Update Playlist
         $playlist = Playlist::find($id);
+
+        // Authorize
+        if(auth()->user()->id !== $playlist->user_id){
+            return redirect('/playlists/'.$id)->with('alert', 'You cannot edit someone elses playlist');
+        }
+
+        // Update Playlist
         $playlist->title = $request->input('title');
         $playlist->description = $request->input('description');
         $playlist->save();
@@ -116,6 +128,17 @@ class PlaylistsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Retrieve
+        $playlist = Playlist::find($id);
+
+        // Authorize
+        if(auth()->user()->id !== $playlist->user_id){
+            return redirect('/playlists/'.$id)->with('alert', 'You cannot delete someone elses playlist');
+        }
+
+        // Delete playlist
+        $playlist->delete();
+
+        return redirect('/playlists')->with('success', 'playlist successfully deleted');
     }
 }
