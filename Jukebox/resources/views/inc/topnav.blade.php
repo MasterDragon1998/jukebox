@@ -14,6 +14,7 @@
 
                 @else
                     <li><a class="nav-link" href="{{ route('playlists.index') }}">Playlists</a></li>
+                    <li><a class="nav-link" href="{{ route('songs.index') }}">Songs</a></li>
                 @endif
             </ul>
 

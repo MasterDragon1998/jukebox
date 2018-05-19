@@ -15,6 +15,8 @@ Route::get('/', 'PagesController@index');
 
 Route::resource('/playlists', 'PlaylistsController');
 
+Route::resource('/songs', 'SongsController');
+
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('home');

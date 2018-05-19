@@ -2,7 +2,7 @@
 
 @section('content')
 	<center>
-		<h2>Playlists</h2>
+		<h2 class="text-light">Playlists</h2>
 	</center>
 	<a href="{{ route('playlists.create') }}" style="position:relative;top:-40px;" class="btn btn-secondary float-right">Create Playlist</a>
 	<hr>
