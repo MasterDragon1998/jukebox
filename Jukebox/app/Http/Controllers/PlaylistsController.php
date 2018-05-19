@@ -8,6 +8,15 @@ use App\Playlist;
 class PlaylistsController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -24,7 +33,7 @@ class PlaylistsController extends Controller
      */
     public function create()
     {
-        //
+        return view('playlists.create');
     }
 
     /**
@@ -35,7 +44,19 @@ class PlaylistsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate
+        $this->validate($request, [
+                'title' => 'required',
+                'description' => 'required'
+            ]);
+
+        // Create Playlist
+        $playlist = new Playlist();
+        $playlist->title = $request->input('title');
+        $playlist->description = $request->input('description');
+        $playlist->save();
+
+        return redirect('/playlists')->with('success', 'Created Playlist');
     }
 
     /**
