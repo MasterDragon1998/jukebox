@@ -54,6 +54,7 @@ class PlaylistsController extends Controller
         $playlist = new Playlist();
         $playlist->title = $request->input('title');
         $playlist->description = $request->input('description');
+        $playlist->user_id = auth()->user()->id;
         $playlist->save();
 
         return redirect('/playlists')->with('success', 'Created Playlist');
