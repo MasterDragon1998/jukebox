@@ -13,6 +13,8 @@
 
 Route::get('/', 'PagesController@index');
 
+Route::resource('/playlists', 'PlaylistsController');
+
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index')->name('home');

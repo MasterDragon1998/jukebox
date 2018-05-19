@@ -10,7 +10,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
+                @guest
 
+                @else
+                    <li><a class="nav-link" href="{{ route('playlists.index') }}">Playlists</a></li>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->
