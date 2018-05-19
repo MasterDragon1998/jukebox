@@ -5,5 +5,6 @@
 	<center>
 		<h2>{{$playlist->title}}</h2>
 	</center>
+	<a href="{{ route('playlists.edit', $playlist->id) }}" style="position:relative;top:-40px;" class="btn btn-secondary float-right">Edit</a>
 	<hr>
 @endsection

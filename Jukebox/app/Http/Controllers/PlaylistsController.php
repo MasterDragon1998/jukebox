@@ -79,7 +79,8 @@ class PlaylistsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $playlist = Playlist::find($id);
+        return view('playlists.edit', ['playlist' => $playlist]);
     }
 
     /**
@@ -91,7 +92,19 @@ class PlaylistsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validate
+        $this->validate($request, [
+                'title' => 'required',
+                'description' => 'required'
+            ]);
+
+        // Update Playlist
+        $playlist = Playlist::find($id);
+        $playlist->title = $request->input('title');
+        $playlist->description = $request->input('description');
+        $playlist->save();
+
+        return redirect('/playlists/'.$id)->with('success', 'Playlist Updated');
     }
 
     /**
